@@ -2,6 +2,15 @@
     "name": "@qboapi/qbo-mcp-server",
     "version": "0.0.1",
     "description": "MCP server implementation for QuickBooks Online integration",
+    "author": "Intuit",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/intuit/quickbooks-online-mcp-server.git"
+    },
+    "homepage": "https://github.com/intuit/quickbooks-online-mcp-server#readme",
+    "bugs": {
+        "url": "https://github.com/intuit/quickbooks-online-mcp-server/issues"
+    },
     "license": "MIT",
     "main": "dist/index.js",
     "type": "module",
@@ -10,7 +19,13 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsc && shx chmod +x dist/*.js",
+        "build": "npm run manifest:check && npm run build:server",
+        "build:server": "tsc && shx chmod +x dist/*.js",
+        "bundle": "npm run manifest:check && npm run manifest:validate && npm run build:server && npm run bundle:pack",
+        "bundle:pack": "node scripts/build-bundle.mjs",
+        "manifest:check": "node scripts/manifest-sync.mjs --check",
+        "manifest:sync": "node scripts/manifest-sync.mjs",
+        "manifest:validate": "mcpb validate manifest.json",
         "prepare": "npm run build",
         "watch": "tsc --watch",
         "lint:fix": "eslint --fix",
@@ -29,6 +44,7 @@
         "zod": "^3.24.2"
     },
     "devDependencies": {
+        "@anthropic-ai/mcpb": "^2.1.2",
         "@eslint/js": "^9.22.0",
         "@jest/globals": "^30.3.0",
         "@types/jest": "^30.0.0",

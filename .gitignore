@@ -3,6 +3,8 @@
 node_modules
 dist
 coverage
+.mcpb-build
+*.mcpb
 
 .env
 .env.local
@@ -13,4 +15,3 @@ start.cmd
 
 # Local capture output (may contain real account balances)
 capture-*.txt
-
