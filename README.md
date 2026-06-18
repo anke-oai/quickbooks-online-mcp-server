@@ -52,6 +52,18 @@ npm install
 npm run build
 ```
 
+### MCP Bundle Installation
+
+MCPB-compatible desktop clients can install the packaged server without cloning the repository or running `npm install`:
+
+1. Download the `.mcpb` artifact and open it with your MCP client.
+2. Enter the Client ID, Client Secret, Refresh Token, Realm ID, and environment when prompted.
+3. Start the server from the client.
+
+The bundle configures credentials but does not eliminate QuickBooks authorization. First-time users must register an Intuit Developer app and complete the browser OAuth flow described in [Authentication](#authentication) before installation to obtain the refresh token and Realm ID.
+
+Maintainers can create a validated bundle with `npm run bundle`. The build derives the advertised tool list from the `ToolDefinition` exports registered in `src/index.ts`; run `npm run manifest:sync` after adding, removing, or renaming a tool. `npm run build` fails when the checked-in manifest has drifted from the source.
+
 ### Configuration
 
 Copy the template `.env.example` to `.env` in the root directory and fill in your values:
